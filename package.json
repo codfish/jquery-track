@@ -5,5 +5,16 @@
   "main": "src/jquery.track.js",
   "repository": "git@github.com:codfish/jquery-track.git",
   "author": "@codfish",
-  "license": "The Unlicense"
+  "license": "The Unlicense",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-plugin-transform-strict-mode": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "rimraf": "^2.6.1",
+    "shelljs": "^0.7.8"
+  }
 }
