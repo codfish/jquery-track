@@ -11,12 +11,12 @@
   /**
    * Helper function for debugging.
    */
-  const log = function log(fieldsObject, message = null) {
+  const log = function log(fields, message = null) {
     if (!window || !window.console) {
       return;
     }
 
-    window.console.log('GA', 'send', fieldsObject);
+    window.console.log('GA', 'send', fields);
   }
 
   /**
@@ -33,32 +33,32 @@
    * @see {@link https://developers.google.com/analytics/devguides/collection/analyticsjs/events}
    * @see {@link https://developers.google.com/analytics/devguides/collection/analyticsjs/social-interactions}
    *
-   * @param {Object}  fieldsObject Object containing GA event data.
-   * @param {boolean} debug        Whether debugging is turned on.
+   * @param {Object}  fields Object containing GA event data.
+   * @param {boolean} debug  Whether debugging is turned on.
    */
-  const trigger = function trigger(fieldsObject, debug = false) {
+  const trigger = function trigger(fields, debug = false) {
     // if debug mode is on, log the ga event data and return
     // before actually triggering the event.
     if (debug) {
-      log(fieldsObject);
+      log(fields);
       return;
     }
 
-    if (fieldsObject.hitType === 'social') {
+    if (fields.hitType === 'social') {
       // re-map fields object for social events
       ga('send', {
         hitType: 'social',
-        socialNetwork: fieldsObject.eventCategory,
-        socialAction: fieldsObject.eventAction,
-        socialTarget: fieldsObject.eventLabel || null,
-        page: fieldsObject.eventValue || null,
+        socialNetwork: fields.eventCategory,
+        socialAction: fields.eventAction,
+        socialTarget: fields.eventLabel || null,
+        page: fields.eventValue || null,
       });
 
       return;
     }
 
     // trigger a standard GA event
-    ga('send', fieldsObject);
+    ga('send', fields);
   };
 
   /**
@@ -77,7 +77,7 @@
 
     const eventType = details.eventType || 'click';
     const isSocial = details.hitType === 'social' || settings.social === true;
-    const fieldsObject = {
+    const fields = {
       hitType: isSocial ? 'social' : 'event',
       eventCategory: details.eventCategory || '',
       eventAction: details.eventAction || '',
@@ -89,12 +89,12 @@
     // if the event type is anything other than 'load', bind an event handler
     // to the element that will trigger a GA event at the time of user action.
     if (eventType !== 'load') {
-      $element.on(eventType, trigger.bind(undefined, fieldsObject, settings.debug));
+      $element.on(eventType, trigger.bind(undefined, fields, settings.debug));
       return;
     }
 
     // trigger event immediately when an event type of load is specified
-    trigger(fieldsObject, settings.debug);
+    trigger(fields, settings.debug);
   };
 
   /**
@@ -106,8 +106,8 @@
    *
    * @param  {Object} options Plugin options
    *
-   * @return {jQuery} Returns the jQuery object that `track()` was called on
-   *                  to allow for training.
+   * @return {jQuery}         Returns the jQuery object that `track()`
+   *                          was called on to allow for training.
    */
   $.fn.track = function(options) {
     const settings = $.extend({}, $.fn.track.defaults, options);
