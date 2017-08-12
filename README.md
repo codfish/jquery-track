@@ -40,6 +40,6 @@ Todo
 
 - [ ] Add options
 - [ ] Add individual data attributes
-- [ ] Add umd during build process
+- [x] Add umd during build process
 - [ ] Add ability for elements created by JS after page load to trigger these events, without needing to initialize
 

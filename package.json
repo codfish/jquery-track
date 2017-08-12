@@ -5,10 +5,12 @@
   "main": "src/jquery.track.js",
   "repository": "git@github.com:codfish/jquery-track.git",
   "author": "@codfish",
-  "license": "The Unlicense",
+  "license": "Unlicense",
   "devDependencies": {
     "babel-core": "^6.25.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
     "babel-plugin-transform-strict-mode": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-rename": "^1.2.2",
