@@ -1,121 +1,123 @@
-;(function($, window, undefined) {
-  /**
-   * @const {Object} Default plugin settings
-   */
-  const defaults = {
-    debug: false,
-    nonInteraction: false,
-    social: false,
-  };
+import $ from 'jquery';
 
-  /**
-   * Helper function for debugging.
-   */
-  const log = function log(fields, message = null) {
-    if (!window || !window.console) {
-      return;
-    }
+/**
+ * @const {Object} Default plugin settings
+ */
+const defaults = {
+  debug: false,
+  nonInteraction: false,
+  social: false,
+};
 
-    window.console.log('GA', 'send', fields);
+/**
+ * Helper function for debugging.
+ */
+const log = function log(fields, message = null) {
+  if (!window || !window.console) {
+    return;
   }
 
-  /**
-   * Public helper function to trigger the GA event. Also helps when you aren't
-   * able to to attach data attr to DOM nodes and just need to trigger an
-   * event immediately.
-   *
-   * NOTE: If it's a social interaction:
-   *   - `eventCategory` maps to `socialNetwork`
-   *   - `eventAction` maps to `socialAction`
-   *   - `eventLabel` maps to `socialTarget`
-   *   - `eventValue` maps to `page`
-   *
-   * @see {@link https://developers.google.com/analytics/devguides/collection/analyticsjs/events}
-   * @see {@link https://developers.google.com/analytics/devguides/collection/analyticsjs/social-interactions}
-   *
-   * @param {Object}  fields Object containing GA event data.
-   * @param {boolean} debug  Whether debugging is turned on.
-   */
-  const trigger = function trigger(fields, debug = false) {
-    // if debug mode is on, log the ga event data and return
-    // before actually triggering the event.
-    if (debug) {
-      log(fields);
-      return;
-    }
+  window.console.log('GA', 'send', fields);
+}
 
-    if (fields.hitType === 'social') {
-      // re-map fields object for social events
-      ga('send', {
-        hitType: 'social',
-        socialNetwork: fields.eventCategory,
-        socialAction: fields.eventAction,
-        socialTarget: fields.eventLabel || null,
-        page: fields.eventValue || null,
-      });
+/**
+ * Public helper function to trigger the GA event. Also helps when you aren't
+ * able to to attach data attr to DOM nodes and just need to trigger an
+ * event immediately.
+ *
+ * NOTE: If it's a social interaction:
+ *   - `eventCategory` maps to `socialNetwork`
+ *   - `eventAction` maps to `socialAction`
+ *   - `eventLabel` maps to `socialTarget`
+ *   - `eventValue` maps to `page`
+ *
+ * @see {@link https://developers.google.com/analytics/devguides/collection/analyticsjs/events}
+ * @see {@link https://developers.google.com/analytics/devguides/collection/analyticsjs/social-interactions}
+ *
+ * @param {Object}  fields Object containing GA event data.
+ * @param {boolean} debug  Whether debugging is turned on.
+ */
+const trigger = function trigger(fields, debug = false) {
+  // if debug mode is on, log the ga event data and return
+  // before actually triggering the event.
+  if (debug) {
+    log(fields);
+    return;
+  }
 
-      return;
-    }
+  if (fields.hitType === 'social') {
+    // re-map fields object for social events
+    ga('send', {
+      hitType: 'social',
+      socialNetwork: fields.eventCategory,
+      socialAction: fields.eventAction,
+      socialTarget: fields.eventLabel || null,
+      page: fields.eventValue || null,
+    });
 
-    // trigger a standard GA event
-    ga('send', fields);
+    return;
+  }
+
+  // trigger a standard GA event
+  ga('send', fields);
+};
+
+/**
+ * Tracking method that runs for each element in the jQuery object
+ * the plugin gets called on.
+ *
+ * @param  {Object} settings Plugin settings
+ */
+const track = function track(settings) {
+  const $element = $(this);
+  const details = $.parseJSON($element.attr('data-ga-event-details'));
+
+  if (!$.isPlainObject(details)) {
+    return;
+  }
+
+  const eventType = details.eventType || 'click';
+  const isSocial = details.hitType === 'social' || settings.social === true;
+  const fields = {
+    hitType: isSocial ? 'social' : 'event',
+    eventCategory: details.eventCategory || '',
+    eventAction: details.eventAction || '',
+    eventLabel: details.eventLabel || null,
+    eventValue: details.eventValue || null,
+    nonInteraction: details.nonInteraction || settings.nonInteraction,
   };
 
-  /**
-   * Tracking method that runs for each element in the jQuery object
-   * the plugin gets called on.
-   *
-   * @param  {Object} settings Plugin settings
-   */
-  const track = function track(settings) {
-    const $element = $(this);
-    const details = $.parseJSON($element.attr('data-ga-event-details'));
+  // if the event type is anything other than 'load', bind an event handler
+  // to the element that will trigger a GA event at the time of user action.
+  if (eventType !== 'load') {
+    $element.on(eventType, trigger.bind(undefined, fields, settings.debug));
+    return;
+  }
 
-    if (!$.isPlainObject(details)) {
-      return;
-    }
+  // trigger event immediately when an event type of load is specified
+  trigger(fields, settings.debug);
+};
 
-    const eventType = details.eventType || 'click';
-    const isSocial = details.hitType === 'social' || settings.social === true;
-    const fields = {
-      hitType: isSocial ? 'social' : 'event',
-      eventCategory: details.eventCategory || '',
-      eventAction: details.eventAction || '',
-      eventLabel: details.eventLabel || null,
-      eventValue: details.eventValue || null,
-      nonInteraction: details.nonInteraction || settings.nonInteraction,
-    };
+/**
+ * The jquery-track plugin init method.
+ *
+ * @see {@link http://github.com/codfish/jquery-track}
+ * @see {@link http://learn.jquery.com/plugins/advanced-plugin-concepts/}
+ *
+ * @param  {Object} options Plugin options
+ *
+ * @return {jQuery} Returns the jQuery object that `track()`
+ *                  was called on to allow for training.
+ */
+const plugin = function plugin(options) {
+  const settings = $.extend({}, $.fn.track.defaults, options);
 
-    // if the event type is anything other than 'load', bind an event handler
-    // to the element that will trigger a GA event at the time of user action.
-    if (eventType !== 'load') {
-      $element.on(eventType, trigger.bind(undefined, fields, settings.debug));
-      return;
-    }
+  return this.each((idx, element) => track.call(element, settings));
+};
 
-    // trigger event immediately when an event type of load is specified
-    trigger(fields, settings.debug);
-  };
+// expose public objects
+plugin.trigger = trigger;
+plugin.defaults = defaults;
+$.fn.extend({ track: plugin });
 
-  /**
-   * The jquery-track plugin method. Dymancially set up google analytics events.
-   *
-   * @see {@link http://github.com/codfish/jquery-track}
-   * @see {@link http://learn.jquery.com/plugins/advanced-plugin-concepts/}
-   * @see {@link http://extraordinarythoughts.com/2011/08/20/understanding-jquery-plugins/}
-   *
-   * @param  {Object} options Plugin options
-   *
-   * @return {jQuery}         Returns the jQuery object that `track()`
-   *                          was called on to allow for training.
-   */
-  $.fn.track = function(options) {
-    const settings = $.extend({}, $.fn.track.defaults, options);
-
-    return this.each((idx, element) => track.call(element, settings));
-  };
-
-  // expose public objects
-  $.fn.track.trigger = trigger;
-  $.fn.track.defaults = defaults;
-}(jQuery, window));
+export default plugin;

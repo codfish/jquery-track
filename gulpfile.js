@@ -5,13 +5,14 @@ const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const rimraf = require('rimraf');
 const fs = require('fs');
+const path = require('path');
 
 require('shelljs/global');
 
 
 const paths = {
-  src: './src',
-  dist: './dist',
+  src: path.resolve(__dirname, 'src'),
+  dist: path.resolve(__dirname, 'dist'),
 };
 
 
@@ -48,9 +49,7 @@ gulp.task('uglify', ['babel'], function () {
   return gulp.src(paths.dist + '/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(uglify())
-    .pipe(rename(function (path) {
-      path.extname = ".min.js"
-    }))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.dist));
 });
