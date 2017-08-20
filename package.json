@@ -19,14 +19,14 @@
     "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
     "babel-plugin-transform-strict-mode": "^6.24.1",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-minify": "^0.0.0",
     "eslint": "^4.5.0",
     "eslint-config-airbnb-base": "^11.3.2",
     "eslint-plugin-import": "^2.7.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^2.6.0",
-    "gulp-uglify": "^3.0.0"
+    "gulp-sourcemaps": "^2.6.0"
   },
   "dependencies": {
     "jquery": ">=1.7"

@@ -28,24 +28,9 @@ gulp.task('babel', () => {
     .pipe(gulp.dest(paths.dist));
 });
 
-/**
- * Uglify
- *
- * @see {@link https://www.npmjs.com/package/gulp-uglify#options}
- */
-gulp.task('uglify', ['babel'], () => {
-  return gulp.src(`${paths.dist}/${filename}`)
-    .pipe(sourcemaps.init())
-    .pipe(uglify())
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.dist));
-});
-
 gulp.task('watch', () => {
   gulp.watch('src/*.js', ['babel']);
 });
 
-gulp.task('build', ['uglify']);
-gulp.task('dev', ['build', 'watch']);
-gulp.task('default', ['build']);
+gulp.task('dev', ['babel', 'watch']);
+gulp.task('default', ['babel']);
