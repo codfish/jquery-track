@@ -6,6 +6,7 @@ Bind google analytics events to DOM elements easily using HTML5 data elements.
 
 * [yarn](https://yarnpkg.com/en/package/jquery-track): `yarn add jquery-track`
 * [npm](http://npmjs.org/package/jquery-track): `npm install --save jquery-track`
+* [unpkg](https://unpkg.com) cdn: [minified](https://unpkg.com/jquery-track/dist/jquery.track.min.js) or [unminified](https://unpkg.com/jquery-track/dist/jquery.track.js)
 * [Download the latest release on Github](https://github.com/codfish/jquery-track/releases)
 
 ## Usage
