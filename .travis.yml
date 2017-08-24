@@ -1,0 +1,21 @@
+language: node_js
+
+node_js:
+  - 'node'
+
+install:
+  - yarn --frozen-lockfile
+
+script:
+  - yarn build
+
+deploy:
+  - provider: npm
+    email: codonnell822+npm@outlook.com
+    skip_cleanup: true
+    api_key:
+      secure: C7Z9KEC/7qDSzCKmkdAuSSN9i0GLifjhJZ0Ukrvy4KmbPdg2/7vrFWcFL4X1n+rtQnvHwUD/pdCXzwMijvYzXnC3jlO9zmSG59YqhERUPlFWBhLEJV7ZP9B2WY8k6X/8FrysIgsowExDK2QBTPhBYiSxDZNkp3LyxnNJcAFEtncZ79SnfclScmuLEVPMmbIUG33f6yRlwGcPdWT3MRElj6V6q4ZNhsBS6I9G632WMe3/k7GY2Frmq7VBoXP1igdE3SNdEEuXAcxNZG5elzi2g1B21v99/NiPix5cELcbVOmeXZnTwum3HzqgK/qhbEPhMrdRUmAZpTn0dsvKAHISoMny1fBAEUeVsM7L+2TtFsgpcraUCSakd7C1BCVqUWvs1DmOicZG6JyLOc/bJtIKygcfIylIdEKB/txirHKCAaOyHe+1eYlEZapQ6qgKaX/7Xm5ivpr6ECvdpLbtGNS5b/7DCkETHpC69ozpFXTDC8I9+zScS3NISFF+RAt1jhQmTG/pxqGcrODPL7raPJTOzkQpHTs4rNUW6xMOEM9vvd0f5foPpNFecXs+RpwU6HNsBmFGKz9+8DLV6l5X35yQbHor0IdLCYDt6oG8L0pLVKSqRcBathRluOUSF8Ge4ZL16sHUCmlTZ7WYo1uBFRxIhSpZ/PBDSoYB7VPltptsZXk=
+    on:
+      tags: true
+      branch: master
+      repo: codfish/jquery-track
