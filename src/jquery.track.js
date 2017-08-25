@@ -17,8 +17,8 @@ const defaults = {
  */
 const log = function log(fields, message = null) {
   const output = ['jquery-track', 'GA send', fields, message];
-  console.log(...output.filter(Boolean));
-}
+  window.console.log(...output.filter(Boolean));
+};
 
 /**
  * Public helper function to trigger the GA event. Also helps when you aren't
@@ -48,7 +48,7 @@ const trigger = function trigger(fields, debug) {
 
   if (fields.hitType === 'social') {
     // re-map fields object for social events
-    ga('send', {
+    window.ga('send', {
       hitType: 'social',
       socialNetwork: fields.eventCategory,
       socialAction: fields.eventAction,
@@ -60,7 +60,7 @@ const trigger = function trigger(fields, debug) {
   }
 
   // trigger a standard GA event
-  ga('send', fields);
+  window.ga('send', fields);
 };
 
 /**
@@ -78,7 +78,7 @@ const trigger = function trigger(fields, debug) {
  * @param  {Object}  options Plugin options.
  * @return {Object}          Final GA event `fieldsObject`.
  */
-const buildFieldsObject = function (el, options) {
+const buildFieldsObject = function buildFieldsObject(el, options) {
   const prefix = `data-${options.prefix}`;
   const hitType = options.social === true
     ? 'social'
@@ -92,7 +92,7 @@ const buildFieldsObject = function (el, options) {
     eventValue: ~~el.getAttribute(`${prefix}event-value`) || null,
     nonInteraction: !!el.getAttribute(`${prefix}non-interaction`),
     transport: el.getAttribute(`${prefix}transport`) || null,
-  }
+  };
 };
 
 /**
@@ -127,9 +127,9 @@ const track = function track(options) {
  *                          was called on to allow for training.
  */
 const plugin = function plugin(options) {
-  options = $.extend({}, $.fn.track.defaults, options);
-
-  return this.each((idx, element) => track.call(element, options));
+  return this.each((idx, element) => {
+    track.call(element, Object.assign({}, defaults, options));
+  });
 };
 
 // expose public objects
