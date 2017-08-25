@@ -12,7 +12,7 @@
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "gulp build",
-    "lint": "eslint src"
+    "lint": "eslint src gulpfile.js"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
