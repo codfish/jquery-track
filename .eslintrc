@@ -6,5 +6,5 @@
   },
   rules: {
     no-bitwise: ['error', { 'allow': ['~'] }]
-  }
+  },
 }
