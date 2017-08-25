@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "prepublish": "yarn build",
+    "prepublishOnly": "yarn build",
     "build": "gulp build"
   },
   "devDependencies": {
