@@ -2,7 +2,7 @@
 
 Bind google analytics events to DOM elements easily using HTML data attributes.
 
-[![Build Status](https://travis-ci.org/codfish/jquery-track.svg?branch=master)](https://travis-ci.org/codfish/jquery-track) [![Code Climate](https://codeclimate.com/github/codfish/jquery-track/badges/gpa.svg)](https://codeclimate.com/github/codfish/jquery-track) [![npm](https://img.shields.io/npm/v/jquery-track.svg)]()
+[![Build Status](https://travis-ci.org/codfish/jquery-track.svg?branch=master)](https://travis-ci.org/codfish/jquery-track) [![Code Climate](https://codeclimate.com/github/codfish/jquery-track/badges/gpa.svg)](https://codeclimate.com/github/codfish/jquery-track) [![npm](https://img.shields.io/npm/v/jquery-track.svg)](http://npmjs.org/package/jquery-track)
 
 ## Installation
 
