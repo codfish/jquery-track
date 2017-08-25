@@ -1,14 +1,15 @@
 # jquery-track
 
-Bind google analytics events to DOM elements easily using data attributes.
+Bind google analytics events to DOM elements easily using HTML data attributes.
 
-[![Build Status](https://travis-ci.org/codfish/jquery-track.svg?branch=master)](https://travis-ci.org/codfish/jquery-track) [![Code Climate](https://codeclimate.com/github/codfish/jquery-track/badges/gpa.svg)](https://codeclimate.com/github/codfish/jquery-track)
+[![Build Status](https://travis-ci.org/codfish/jquery-track.svg?branch=master)](https://travis-ci.org/codfish/jquery-track) [![Code Climate](https://codeclimate.com/github/codfish/jquery-track/badges/gpa.svg)](https://codeclimate.com/github/codfish/jquery-track) [![npm](https://img.shields.io/npm/v/jquery-track.svg)]()
 
 ## Installation
 
 * [yarn](https://yarnpkg.com/en/package/jquery-track): `yarn add jquery-track`
 * [npm](http://npmjs.org/package/jquery-track): `npm install --save jquery-track`
 * [unpkg](https://unpkg.com) cdn: [minified](https://unpkg.com/jquery-track/dist/jquery.track.min.js) or [unminified](https://unpkg.com/jquery-track/dist/jquery.track.js)
+* [jsdeliver](http://www.jsdelivr.com/) cdn: [minified](https://cdn.jsdelivr.net/npm/jquery-track@latest/dist/jquery.track.min.js) or [unminified](https://cdn.jsdelivr.net/npm/jquery-track@latest/dist/jquery.track.js)
 * [Download the latest release on Github](https://github.com/codfish/jquery-track/releases)
 
 ## Usage
@@ -31,14 +32,14 @@ $('a').track();
 
 The following data attributes are available, most of which map directly to [GA event fields](https://developers.google.com/analytics/devguides/collection/analyticsjs/events#event_fields).
 
-  - `data-event-type` is the event types you want to trigger the event on. **Default** is `click`. Can be any event type supported by jQuery.
-  - `data-hit-type` maps to the `hitType` GA field. _Optional_, defaults to `event`. Can **only** be `event` or [`social`](https://developers.google.com/analytics/devguides/collection/analyticsjs/social-interactions).
-  - `data-event-category` maps to the `eventCategory` GA field. **Required**.
-  - `data-event-action` maps to the `eventAction` GA field. **Required**.
-  - `data-event-label` maps to the `eventLabel` GA field. _Optional_, defaults to `null`.
-  - `data-event-value` maps to the `eventValue` GA field. _Optional_, defaults to `null`.
-  - `data-non-interation` maps to the `nonInteraction` GA field. _Optional_, defaults to `false`.
-  - `data-transport` maps to the `transport` GA field. _Optional_, defaults to `null`.
+- `data-event-category` maps to the `eventCategory` GA field. **Required**.
+- `data-event-action` maps to the `eventAction` GA field. **Required**.
+- `data-event-label` maps to the `eventLabel` GA field. _Optional_, defaults to `null`.
+- `data-event-value` maps to the `eventValue` GA field. _Optional_, defaults to `null`.
+- `data-non-interation` maps to the `nonInteraction` GA field. _Optional_, defaults to `false`.
+- `data-transport` maps to the `transport` GA field. _Optional_, defaults to `null`.
+- `data-event-type` is the event types you want to trigger the event on. _Optional_, defaults to `click`. Can be any DOM event type that is [supported by jQuery](http://api.jquery.com/Types/#Event), as well as custom events.
+- `data-hit-type` maps to the `hitType` GA field. _Optional_, defaults to `event`. Can **only** be `event` or [`social`](https://developers.google.com/analytics/devguides/collection/analyticsjs/social-interactions).
 
 Further details about the meaning of these fields can be [found in the Google Analytics documentation](https://developers.google.com/analytics/devguides/collection/analyticsjs/events).
 
