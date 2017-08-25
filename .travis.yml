@@ -2,11 +2,8 @@ language: node_js
 
 node_js: node
 
-group: edge
-
 install:
-  - yarn --version
-  - yarn install --frozen-lockfile
+  - yarn install --pure-lockfile
 
 script:
   - yarn build
