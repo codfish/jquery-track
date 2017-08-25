@@ -2,6 +2,8 @@
 
 Bind google analytics events to DOM elements easily using data attributes.
 
+[![Build Status](https://travis-ci.org/codfish/jquery-track.svg?branch=master)](https://travis-ci.org/codfish/jquery-track) [![Code Climate](https://codeclimate.com/github/codfish/jquery-track/badges/gpa.svg)](https://codeclimate.com/github/codfish/jquery-track)
+
 ## Installation
 
 * [yarn](https://yarnpkg.com/en/package/jquery-track): `yarn add jquery-track`
