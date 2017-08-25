@@ -1,8 +1,8 @@
 # jquery-track
 
-Bind google analytics events to DOM elements easily using HTML5 data elements.
+Bind google analytics events to DOM elements easily using data attributes.
 
-## Install
+## Installation
 
 * [yarn](https://yarnpkg.com/en/package/jquery-track): `yarn add jquery-track`
 * [npm](http://npmjs.org/package/jquery-track): `npm install --save jquery-track`
@@ -11,36 +11,91 @@ Bind google analytics events to DOM elements easily using HTML5 data elements.
 
 ## Usage
 
-#### data-ga-event-details attribute
+Basic example using `data-` attributes:
 
 ```html
 <a href="/"
-    class="ga-event"
-    data-ga-event-details='{"eventType": "click", "eventCategory": "Site Navigation", "eventAction": "click", "eventLabel": "Home"}'>Home</a>
+    data-event-category="Site Navigation"
+    data-event-action="click"
+    data-event-label="Home">Home</a>
 ```
-
-You can send in the following:
-
-  - `eventType` | string (default = `'click'`)
-  - `hitType` | string <'event'|'social'> (default = `'event'`)
-  - `eventCategory` | string
-  - `eventAction` | string
-  - `eventLabel` | string
-  - `eventValue` | integer (default = `null`)
-  - `eventNonInteraction` | boolean (default = `false`)
 
 ```js
-  $('.ga-event').track();
+// initialize the plugin
+$('a').track();
 ```
 
-Options
--------
+### Data attributes
 
-Todo
-----
+The following data attributes are available, most of which map directly to [GA event fields](https://developers.google.com/analytics/devguides/collection/analyticsjs/events#event_fields).
 
-- [ ] Add options
-- [ ] Add individual data attributes
+  - `data-event-type` is the event types you want to trigger the event on. **Default** is `click`. Can be any event type supported by jQuery.
+  - `data-hit-type` maps to the `hitType` GA field. _Optional_, defaults to `event`. Can **only** be `event` or [`social`](https://developers.google.com/analytics/devguides/collection/analyticsjs/social-interactions).
+  - `data-event-category` maps to the `eventCategory` GA field. **Required**.
+  - `data-event-action` maps to the `eventAction` GA field. **Required**.
+  - `data-event-label` maps to the `eventLabel` GA field. _Optional_, defaults to `null`.
+  - `data-event-value` maps to the `eventValue` GA field. _Optional_, defaults to `null`.
+  - `data-non-interation` maps to the `nonInteraction` GA field. _Optional_, defaults to `false`.
+  - `data-transport` maps to the `transport` GA field. _Optional_, defaults to `null`.
+
+Further details about the meaning of these fields can be [found in the Google Analytics documentation](https://developers.google.com/analytics/devguides/collection/analyticsjs/events).
+
+## Plugin options
+
+#### debug {Boolean} _Default:_ `false`
+
+Set to true to turn on debug mode. Events will get logged to the browser console, instead of being sent to GA.
+
+```js
+$('a').track({ debug: true });
+```
+
+#### social {Boolean} _Default:_ `false`
+
+Set to true if you're tracking a [social event]().
+
+```html
+<a href="#"
+    data-event-category="Twitter"
+    data-event-action="tweet"
+    data-event-label="http://codfish.io">Tweet</a>
+```
+
+```js
+$('a').track({ social: true });
+```
+
+Alternatively, you can use the `data-hit-type` attribute if you don't want to use the option, or you have a mixture of non-social & social elements you're tracking.
+
+```html
+<a href="#"
+    data-hit-type="social"
+    data-event-category="Twitter"
+    data-event-action="tweet"
+    data-event-label="http://codfish.io">Tweet</a>
+```
+
+#### prefix {String} _Default:_ `''`
+
+Use this option to tell the plugin to grab field values from data attributes with this prefix, i.e. `data-{prefix}event-category`. This can help in the rare instance that you may have a naming conflict with a data attribute.
+
+```html
+<a href="/"
+    data-ga-event-category="Site Navigation"
+    data-ga-event-action="click"
+    data-ga-event-label="Home">Home</a>
+```
+
+```js
+$('a').track({ prefix: 'ga-' });
+```
+
+## Todo
+
+- [x] Add options
 - [x] Add umd during build process
-- [ ] Add ability for elements created by JS after page load to trigger these events, without needing to initialize
-
+- [x] Add individual data attributes
+- [x] Add `transport: 'beacon'` support. https://developers.google.com/analytics/devguides/collection/analyticsjs/sending-hits#specifying_different_transport_mechanisms
+- [ ] Add ability for elements created after pageload to trigger events.
+- [ ] Handle multiple event types, i.e. `data-event-type="load click"`
+- [ ] Possibly refactor to handle all hit types, i.e. page/app tracking (`pageview`, `screenview`), ecommerce tracking (`transaction` or `item`)
