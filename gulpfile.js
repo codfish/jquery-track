@@ -18,7 +18,7 @@ const filename = 'jquery.track.js';
  *
  * @see {@link https://babeljs.io/docs/usage/options/}
  */
-gulp.task('babel', function () {
+gulp.task('babel', () => {
   return gulp.src(`${paths.src}/${filename}`)
     .pipe(sourcemaps.init())
     .pipe(babel())
@@ -31,7 +31,7 @@ gulp.task('babel', function () {
  *
  * @see {@link https://www.npmjs.com/package/gulp-uglify#options}
  */
-gulp.task('uglify', ['babel'], function () {
+gulp.task('uglify', ['babel'], () => {
   return gulp.src(`${paths.dist}/${filename}`)
     .pipe(sourcemaps.init())
     .pipe(uglify())
@@ -41,7 +41,7 @@ gulp.task('uglify', ['babel'], function () {
 });
 
 gulp.task('watch', () => {
-    gulp.watch('src/*.js', ['babel']);
+  gulp.watch('src/*.js', ['babel']);
 });
 
 gulp.task('build', ['uglify']);

@@ -5,6 +5,7 @@
     es6: true,
   },
   rules: {
-    no-bitwise: ['error', { 'allow': ['~'] }]
+    no-bitwise: ['error', { 'allow': ['~'] }],
+    'import/extensions': ['off', 'never'],
   },
 }
