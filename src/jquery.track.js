@@ -15,7 +15,7 @@ const defaults = {
  * @param {Object} fields       GA event fields object.
  * @param {String} [message=''] Custom message.
  */
-const log = function log(fields, message = null) {
+const log = (fields, message = null) => {
   const output = ['jquery-track', 'GA send', fields, message];
   window.console.log(...output.filter(Boolean));
 };
@@ -38,7 +38,7 @@ const log = function log(fields, message = null) {
  * @param {Boolean} debug  Whether debugging is turned on.
  * @param {Event}   evt    jQuery event object
  */
-const trigger = function trigger(fields, debug) {
+const trigger = (fields, debug) => {
   // if debug mode is on, log the ga event data and return
   // before actually triggering the event.
   if (debug) {
@@ -78,7 +78,7 @@ const trigger = function trigger(fields, debug) {
  * @param  {Object}  options Plugin options.
  * @return {Object}          Final GA event `fieldsObject`.
  */
-const buildFieldsObject = function buildFieldsObject(el, options) {
+const buildFieldsObject = (el, options) => {
   const prefix = `data-${options.prefix}`;
   const hitType = options.social === true
     ? 'social'
@@ -101,7 +101,7 @@ const buildFieldsObject = function buildFieldsObject(el, options) {
  *
  * @param  {Object} options Plugin options
  */
-const track = function track(options) {
+const track = (options) => {
   const eventFields = buildFieldsObject(this, options);
   const eventType = this.getAttribute(`data-${options.prefix}event-type`) || 'click';
 
@@ -126,7 +126,7 @@ const track = function track(options) {
  * @return {jQuery}         Returns the jQuery object that `track()`
  *                          was called on to allow for training.
  */
-const plugin = function plugin(options) {
+const plugin = (options) => {
   return this.each((idx, element) => {
     track.call(element, Object.assign({}, defaults, options));
   });
