@@ -126,11 +126,9 @@ const track = (options) => {
  * @return {jQuery}         Returns the jQuery object that `track()`
  *                          was called on to allow for training.
  */
-const plugin = (options) => {
-  return this.each((idx, element) => {
-    track.call(element, Object.assign({}, defaults, options));
-  });
-};
+const plugin = options => this.each((idx, element) => {
+  track.call(element, Object.assign({}, defaults, options));
+});
 
 // expose public objects
 plugin.trigger = trigger;
