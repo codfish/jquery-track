@@ -2,6 +2,8 @@ language: node_js
 
 node_js: node
 
+cache: yarn
+
 install:
   - yarn install --pure-lockfile
 
