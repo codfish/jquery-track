@@ -7,6 +7,9 @@ cache: yarn
 install:
   - yarn install --pure-lockfile
 
+before_script:
+  - yarn lint
+
 script:
   - yarn build
 
