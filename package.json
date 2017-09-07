@@ -1,7 +1,7 @@
 {
   "name": "jquery-track",
   "description": "Bind google analytics events to DOM elements easily using HTML data attributes.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "dist/jquery.track.js",
   "repository": "git@github.com:codfish/jquery-track.git",
   "author": "@codfish",
