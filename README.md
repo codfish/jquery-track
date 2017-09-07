@@ -99,6 +99,6 @@ $('a').track({ prefix: 'ga-' });
 - [x] Add umd during build process
 - [x] Add individual data attributes
 - [x] Add `transport: 'beacon'` support. https://developers.google.com/analytics/devguides/collection/analyticsjs/sending-hits#specifying_different_transport_mechanisms
-- [ ] Add ability for elements created after pageload to trigger events.
+- [ ] Store each instance of the plugin as a dataset item, to help prevent re-initializing items.
 - [ ] Handle multiple event types, i.e. `data-event-type="load click"`
 - [ ] Possibly refactor to handle all hit types, i.e. page/app tracking (`pageview`, `screenview`), ecommerce tracking (`transaction` or `item`)
