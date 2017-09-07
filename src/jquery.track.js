@@ -101,7 +101,7 @@ const buildFieldsObject = (el, options) => {
  *
  * @param  {Object} options Plugin options
  */
-const track = (options) => {
+const track = function track(options) {
   const eventFields = buildFieldsObject(this, options);
   const eventType = this.getAttribute(`data-${options.prefix}event-type`) || 'click';
 
@@ -126,9 +126,11 @@ const track = (options) => {
  * @return {jQuery}         Returns the jQuery object that `track()`
  *                          was called on to allow for training.
  */
-const plugin = options => this.each((idx, element) => {
-  track.call(element, Object.assign({}, defaults, options));
-});
+const plugin = function plugin(options) {
+  return this.each((idx, element) => {
+    track.call(element, Object.assign({}, defaults, options));
+  });
+};
 
 // expose public objects
 plugin.trigger = trigger;
