@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jquery-track test</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<script src="../dist/jquery.track.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-104368697-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+<body>
+<ul>
+<li>
+  <a href="#" class="ga-event" data-category="Site Navigation" data-label="Level 2: News: Alternatives">Alternatives</a>
+  </li>
+<li>
+  <a href="#" class="ga-event" data-category="Site Navigation" data-label="Level 2: News: Consultants">Consultants</a>
+</li>
+<li>
+  <a href="#" class="ga-event" data-category="Site Navigation" data-label="Level 2: News: Defined Benefit">Defined Benefit</a>
+</li>
+<li>
+  <a href="#" class="ga-event" data-category="Site Navigation" data-label="Level 2: News: Defined Contribution">Defined Contribution</a>
+</li>
+<li>
+  <a href="#" class="ga-event" data-category="Site Navigation" data-label="Level 2: News: Hedge Funds">Hedge Funds</a>
+</li>
+<li>
+  <a href="#"  class="ga-event" data-category="Site Navigation" data-label="Level 2: News: Investing / Portfolio Strategies">Investing &#47; Portfolio Strategies</a>
+</li>
+</ul>
+
+  <script async>
+    $.fn.track.defaults.debug = true;
+    $('.ga-event').track();
+  </script>
+
+</body>
+</html>

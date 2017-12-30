@@ -1,11 +1,17 @@
 {
-  extends: 'airbnb-base',
-  env: {
-    browser: true,
-    es6: true,
+  "extends": "airbnb-base",
+  "env": {
+    "browser": true,
+    "es6": true
   },
-  rules: {
-    no-bitwise: ['error', { 'allow': ['~'] }],
-    'import/extensions': ['off', 'never'],
-  },
+  "rules": {
+    "no-bitwise": [
+      "error",
+      {
+        "allow": [
+          "~"
+        ]
+      }
+    ]
+  }
 }

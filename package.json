@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn build",
-    "build": "gulp build",
+    "build": "babel src --out-dir dist",
     "lint": "eslint src gulpfile.js"
   },
   "devDependencies": {
@@ -19,7 +19,7 @@
     "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
     "babel-plugin-transform-strict-mode": "^6.24.1",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-minify": "^0.0.0",
+    "babel-preset-minify": "^0.2.0",
     "eslint": "^4.5.0",
     "eslint-config-airbnb-base": "^11.3.2",
     "eslint-plugin-import": "^2.7.0",

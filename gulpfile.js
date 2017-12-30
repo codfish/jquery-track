@@ -1,8 +1,5 @@
-/* eslint arrow-body-style: 0 */
-
 const gulp = require('gulp');
 const babel = require('gulp-babel');
-const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const path = require('path');

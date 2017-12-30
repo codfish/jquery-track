@@ -1,11 +1,22 @@
 {
-  presets: ['env', 'minify'],
-  plugins: [
-    'transform-strict-mode',
-    ['transform-es2015-modules-umd', {
-      globals: {
-        jquery: "$",
-      },
-    }],
+  "presets": [
+    "env",
+    [
+      "minify",
+      {
+        "keepFnName": true
+      }
+    ]
   ],
+  "plugins": [
+    "transform-strict-mode",
+    [
+      "transform-es2015-modules-umd",
+      {
+        "globals": {
+          "jquery": "$"
+        }
+      }
+    ]
+  ]
 }
