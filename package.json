@@ -29,6 +29,6 @@
     "gulp-uglify": "^3.0.0"
   },
   "dependencies": {
-    "jquery": ">=1.7"
+    "jquery": ">=2.0"
   }
 }
