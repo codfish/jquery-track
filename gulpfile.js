@@ -7,13 +7,11 @@ const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const path = require('path');
 
-
 const paths = {
   src: path.resolve(__dirname, 'src'),
   dist: path.resolve(__dirname, 'dist'),
 };
 const filename = 'jquery.track.js';
-
 
 /**
  * Transpile es6 to es5 using babel
@@ -21,7 +19,8 @@ const filename = 'jquery.track.js';
  * @see {@link https://babeljs.io/docs/usage/options/}
  */
 gulp.task('babel', () => {
-  return gulp.src(`${paths.src}/${filename}`)
+  return gulp
+    .src(`${paths.src}/${filename}`)
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(sourcemaps.write('.'))
@@ -34,7 +33,8 @@ gulp.task('babel', () => {
  * @see {@link https://www.npmjs.com/package/gulp-uglify#options}
  */
 gulp.task('uglify', ['babel'], () => {
-  return gulp.src(`${paths.dist}/${filename}`)
+  return gulp
+    .src(`${paths.dist}/${filename}`)
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
