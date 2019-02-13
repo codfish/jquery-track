@@ -80,9 +80,8 @@ const trigger = (fields, debug) => {
  */
 const buildFieldsObject = (el, options) => {
   const prefix = `data-${options.prefix}`;
-  const hitType = options.social === true
-    ? 'social'
-    : el.getAttribute(`${prefix}hit-type`) || 'event';
+  const hitType =
+    options.social === true ? 'social' : el.getAttribute(`${prefix}hit-type`) || 'event';
 
   return {
     hitType,
